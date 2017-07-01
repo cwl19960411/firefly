@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=4.0, user-scalable=yes" /> 
+
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+
+<title>用户登录</title>
+
+
+<style type="text/css">
+
+html{font-size:12px;}
+
+fieldset{width:300px; margin: 0 auto;}
+
+legend{font-weight:bold; font-size:14px;}
+
+.label{float:left; width:70px; margin-left:10px;}
+
+.left{margin-left:80px;}
+
+.input{width:150px;}
+
+span{color: #666666;}
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>regist</title>
+    <script>
+     
+        window.addEventListener('load',function(){
+             
+            var form = document.forms[0];
+            var getUserInfo = function(){
+             
+                var value ={};
+             
+                for(var i=0,len=form.elements.length;i<len;i++){
+                     
+                     var el = form.elements[i];
+                     
+                    if(/text|password/.test(el.type)){
+                        value[el.name] = el.value;
+                    }
+                         
+                }
+                 
+                return value;
+            };
+            form.addEventListener('submit',function(e){
+             
+                e.preventDefault();
+                 
+                var userInfo = getUserInfo();
+                 
+                localStorage.setItem(userInfo.userName,JSON.stringify(userInfo));
+                 
+                alert('注册成功!');
+                 
+            });
+             
+            document.getElementsByTagName('button')[0].addEventListener('click',function(e){
+                 
+                e.preventDefault();
+                 
+                var value = getUserInfo();
+                var out = [];
+                for(var name in value)
+                    out.push(name+'='+value[name]);
+                alert(out.join(','));
+                 
+            });
+        });
+         
+    </script>
+</head>
+<body>
+<div >
+
+<fieldset>
+
+<legend>用户登录</legend>
+    <p>
+
+<label for="username" class="label">用户名:</label>
+
+<input id="username" name="username" type="text" class="input" />
+
+<p/>
+<p>
+
+<label for="password" class="label">密 码:</label>
+
+<input id="password" name="password" type="password" class="input" />
+
+<p/>
+
+<p>
+
+<input type="submit" name="submit" value=" 确 定 " class="left" />&nbsp&nbsp<button>注册</button>
+
+</p>
+ 
+</body>
+</html>
